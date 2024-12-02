@@ -1,21 +1,16 @@
 from helpers import parse_input_into_matrix
 
-matrix = parse_input_into_matrix('inputs/test_input2.txt')
+matrix = parse_input_into_matrix('inputs/real_input2.txt')
 
 def is_safe(report):
-    increasing = all(i < j for i, j in zip(report, report[1:]))
-    decreasing = all(i > j for i, j in zip(report, report[1:]))
-    if not increasing and not decreasing:
-        return False
-    if (all(increasing and (1 <= j-i <= 3) for i, j in zip(report, report[1:]))):
-        return True
-    elif (all(decreasing and (1 <= i-j <= 3) for i, j in zip(report, report[1:]))):
-        return True
-    return False
+    pairs = [(report[i], report[i+1]) for i in range(len(report)-1)]
+    safe_increasing = all((1 <= j-i <= 3) for i, j in pairs)
+    safe_decreasing = all((1 <= i-j <= 3) for i, j in pairs)
+    
+    return safe_increasing or safe_decreasing
 
 def part1():
     total = 0
-    
     for report in matrix:
         if is_safe(report):
             total += 1
@@ -35,4 +30,5 @@ def part2():
             
     return total
 
+print(part1())
 print(part2())

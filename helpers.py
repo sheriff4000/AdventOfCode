@@ -12,3 +12,13 @@ def parse_input_into_two_lists(filename, sort=False):
         list1.sort()
         list2.sort()
     return list1, list2
+
+def parse_input_into_matrix(filename):
+    with open(filename) as f:
+        lines = f.read().splitlines()
+
+    matrix = [line.split() for line in lines]
+    for i in range(len(matrix)):
+        for j in range(len(matrix[i])):
+            matrix[i][j] = int(matrix[i][j])
+    return matrix

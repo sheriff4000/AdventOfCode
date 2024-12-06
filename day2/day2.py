@@ -1,6 +1,6 @@
 from helpers import parse_input_into_matrix
 
-matrix = parse_input_into_matrix('inputs/real_input2.txt')
+matrix = parse_input_into_matrix('real_input2.txt')
 
 def is_safe(report):
     pairs = [(report[i], report[i+1]) for i in range(len(report)-1)]

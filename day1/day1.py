@@ -1,6 +1,6 @@
 from helpers import parse_input_into_two_lists
 
-list1, list2 = parse_input_into_two_lists('inputs/real_input1.txt')
+list1, list2 = parse_input_into_two_lists('real_input1.txt')
 def part1():
     total = 0
     list1.sort()

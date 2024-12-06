@@ -1,5 +1,5 @@
 
-with open('inputs/real_input6.txt') as f:
+with open('real_input6.txt') as f:
     grid = f.read().splitlines()
 
 

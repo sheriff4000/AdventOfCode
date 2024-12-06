@@ -1,5 +1,5 @@
 
-with open('inputs/real_input5.txt') as f:
+with open('real_input5.txt') as f:
     lines = f.read()
 
 rules, pages = lines.split('\n\n')

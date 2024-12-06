@@ -1,6 +1,6 @@
 import re
 
-instructions = open('inputs/real_input3.txt').read()
+instructions = open('real_input3.txt').read()
 print(instructions)
 
 

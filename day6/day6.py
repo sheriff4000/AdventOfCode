@@ -9,15 +9,14 @@ def find_guard():
             return (idx, line.index('^'))
         
 start_pos = find_guard()
-def find_path(start, lines=grid, new_obs=[]):
-    stack = [(start, None, "up")]
+def find_path(start, lines=grid, new_obs=None):
+    stack = [(start, "up")]
     visited = set()
     visited_directions = set()
-    loop = False
     while stack:
-        curr, prev, curr_dir = stack.pop()
- 
-        if len(new_obs) > 0 and (curr[0], curr[1], curr_dir) in visited_directions:
+        curr, curr_dir = stack.pop()
+        # print(curr, curr_dir)
+        if new_obs is not None and (curr[0], curr[1], curr_dir) in visited_directions:
             return True
 
         x, y = curr
@@ -25,8 +24,7 @@ def find_path(start, lines=grid, new_obs=[]):
         if x < 0 or x >= len(lines) or y < 0 or y >= len(lines[0]):
             continue
 
-        if lines[x][y] == '#' or (x, y) in new_obs:
-            curr = prev
+        if lines[x][y] == '#' or (x, y) == new_obs:
             if curr_dir == "up":
                 new_dir = "right"
                 next_pos = (x+1, y+1)
@@ -39,7 +37,7 @@ def find_path(start, lines=grid, new_obs=[]):
             elif curr_dir == "left":
                 new_dir = "up"
                 next_pos = (x-1, y+1)
-
+            # print("facing: ", curr_dir, "new_dir: ", new_dir)
         else:
             if curr_dir == "up":
                 next_pos = (x-1, y)
@@ -55,14 +53,14 @@ def find_path(start, lines=grid, new_obs=[]):
             visited_directions.add((x, y, curr_dir))
 
         if next_pos is not None:
-            stack.append((next_pos, curr, new_dir))
+            stack.append((next_pos, new_dir))
 
-    if len(new_obs) > 0:
+    if new_obs is not None:
         return False
-    return visited, visited_directions, loop
+    return visited
 
 def part1():
-    points, _, _ = find_path(start_pos)
+    points = find_path(start_pos)
     return len(points)
 
 def part2():
@@ -72,9 +70,10 @@ def part2():
     for i in range(len(grid)):
         for j in range(len(grid[0])):
             if grid[i][j] == '.':
-                is_loop = find_path((i, j), new_obs=[(i,j)])
+                print("looking at point: ", i, j)
+                is_loop = find_path(start_pos, new_obs=(i,j))
                 res += 1 if is_loop else 0
     return res
 
-print(part1())
+# print(part1())
 print(part2())

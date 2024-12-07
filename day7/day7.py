@@ -44,5 +44,5 @@ def part1(lines):
 def part2(lines):
     return solve(lines, ['+', '*', '||'])
 
-print(part1(lines))
-print(part2(lines))
+print("part 1: ", part1(lines))
+print("part 2: ", part2(lines))

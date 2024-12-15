@@ -73,6 +73,3 @@ data = parse_input_into_matrix("day12/real.txt")
 regions = plant_regions(data)
 print("part1: ", sum(region.area * region.perimeter for region in regions))
 print("part2: ", sum(region.area * region.corner_count() for region in regions))
-
-# print(part1(data))
-# print(part2(data))
